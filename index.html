@@ -504,7 +504,7 @@ function setFilter(f){curF=f;var bs=document.querySelectorAll("#procFilters .chi
 function renderProcs(){
  var q=norm(document.getElementById("procQ").value||"");
  var list=PROCS.map(function(p,i){p.i=i;return p}).filter(function(p){return (curF==="all"||p.c===curF)&&(!q||norm(p.t).indexOf(q)>-1)});
- document.getElementById("procGrid").innerHTML=list.map(function(p){return '<button class="proc '+(p.i===curProc?'active':'')+'" onclick="showProc('+p.i+')"><h3>'+p.t+'</h3><span class="meta">'+p.d+'</span></button>'}).join("")||'<p class="small">Không thấy thủ tục khớp. Thử từ khóa ngắn hơn hoặc chọn nhóm khác.</p>';
+ document.getElementById("procGrid").innerHTML=list.map(function(p){return '<button class="proc '+(p.i===curProc?'active':'')+'" onclick="showProc('+p.i+')"><h3>'+p.t+'</h3></button>'}).join("")||'<p class="small">Không thấy thủ tục khớp. Thử từ khóa ngắn hơn hoặc chọn nhóm khác.</p>';
  if(list.length){var found=false;for(var i=0;i<list.length;i++)if(list[i].i===curProc)found=true;showProc(found?curProc:list[0].i,true)}
 }
 var PORTAL_NOTE='<div class="note"><b>Lưu ý khi chọn “Hình thức đăng ký” trên cổng nộp hồ sơ:</b> hồ sơ chỉ có nội dung thay đổi thì chọn “Thay đổi nội dung đăng ký doanh nghiệp”; hồ sơ chỉ có nội dung thông báo thì chọn “Thông báo thay đổi”; hồ sơ vừa có nội dung thay đổi vừa có nội dung thông báo thì chọn “Thay đổi nội dung đăng ký doanh nghiệp”.</div>';
