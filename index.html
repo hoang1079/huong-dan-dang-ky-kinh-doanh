@@ -512,7 +512,7 @@ var INDS=[
 ["0119","Trồng cây hàng năm khác","Sản xuất & nông nghiệp",""],["0311","Khai thác thủy sản biển","Sản xuất & nông nghiệp",""],["1079","Chế biến và bảo quản thực phẩm khác","Sản xuất & nông nghiệp",""],["4101","Xây dựng nhà để ở","Xây dựng & bất động sản",""],["4102","Xây dựng nhà không để ở","Xây dựng & bất động sản",""],["4212","Xây dựng công trình đường bộ","Xây dựng & bất động sản",""],["4299","Xây dựng công trình kỹ thuật dân dụng khác","Xây dựng & bất động sản",""],["4312","Chuẩn bị mặt bằng","Xây dựng & bất động sản",""],["4321","Lắp đặt hệ thống điện","Xây dựng & bất động sản",""],["4390","Hoạt động xây dựng chuyên dụng khác","Xây dựng & bất động sản",""],["6810","Kinh doanh bất động sản, quyền sử dụng đất thuộc chủ sở hữu/chủ sử dụng hoặc đi thuê","Xây dựng & bất động sản",""],["4610","Đại lý, môi giới, đấu giá hàng hóa","Thương mại & dịch vụ","Không gồm đấu giá tài sản theo luật chuyên ngành"],["4620","Bán buôn nông, lâm sản nguyên liệu và động vật sống","Thương mại & dịch vụ",""],["4632","Bán buôn thực phẩm","Thương mại & dịch vụ","Ngành có điều kiện VSATTP khi sản xuất/chế biến"],["4649","Bán buôn đồ dùng khác cho gia đình","Thương mại & dịch vụ",""],["4659","Bán buôn máy móc, thiết bị và phụ tùng máy khác","Thương mại & dịch vụ",""],["4663","Bán buôn mô tô, xe máy, phụ tùng và các bộ phận phụ trợ của mô tô, xe máy","Thương mại & dịch vụ",""],["4719","Bán lẻ khác trong các cửa hàng kinh doanh tổng hợp","Thương mại & dịch vụ",""],["4730","Bán lẻ nhiên liệu động cơ","Thương mại & dịch vụ","Xăng dầu — ngành có điều kiện"],["4740","Bán lẻ máy vi tính, thiết bị ngoại vi, phần mềm và thiết bị viễn thông","Thương mại & dịch vụ","Mã mới gộp 4741 + 4742"],["4790","Hoạt động dịch vụ trung gian bán lẻ","Thương mại & dịch vụ","Chỉ dành cho đơn vị làm trung gian hưởng phí/hoa hồng, không sở hữu hàng hóa"],["5610","Nhà hàng và các dịch vụ ăn uống phục vụ lưu động","Thương mại & dịch vụ","Điều kiện VSATTP"],["5630","Quán rượu, bia, quầy bar","Thương mại & dịch vụ",""],["5510","Dịch vụ lưu trú ngắn ngày","Thương mại & dịch vụ","Khách sạn, homestay — điều kiện ANTT, PCCC tùy quy mô"],["7911","Đại lý du lịch","Thương mại & dịch vụ",""],["7912","Điều hành tour du lịch","Thương mại & dịch vụ","Lữ hành quốc tế có điều kiện ký quỹ"],["4933","Vận tải hàng hóa bằng đường bộ","Thương mại & dịch vụ","Điều kiện kinh doanh vận tải"],["4940","Vận tải đường ống","Thương mại & dịch vụ",""],["5210","Kho bãi và lưu giữ hàng hóa","Thương mại & dịch vụ",""],["6219","Lập trình máy vi tính","Công nghệ & khác","Một trong hai mã tách ra từ mã cũ 6201"],["6220","Tư vấn máy vi tính và quản trị hệ thống máy vi tính","Công nghệ & khác","Mã mới thay 6202"],["6290","Hoạt động dịch vụ công nghệ thông tin khác","Công nghệ & khác","Mã mới thay 6209"],["6310","Xử lý dữ liệu, cho thuê và các hoạt động liên quan; cổng thông tin","Công nghệ & khác","Mã mới thay 6311/6312"],["6390","Hoạt động dịch vụ thông tin khác","Công nghệ & khác",""],["7310","Quảng cáo","Công nghệ & khác","Quảng cáo ngoài trời có giấy phép con"],["7320","Nghiên cứu thị trường và thăm dò dư luận","Công nghệ & khác",""],["7020","Hoạt động tư vấn quản lý","Công nghệ & khác",""],["8559","Giáo dục khác chưa được phân vào đâu","Công nghệ & khác","Dạy nghề, ngoại ngữ có điều kiện"],["9311","Hoạt động của các cơ sở thể thao","Công nghệ & khác",""],["9510","Sửa chữa máy tính và thiết bị liên lạc","Công nghệ & khác","Mã mới thay 9511"]
 ];
 var IND_KEYS={"4730":["ban le xang dau","xang dau","cay xang"],"5610":["ca phe","cafe","quan ca phe"],"5630":["ca phe","cafe","quan ca phe"]};
-function indMatch(r,q){if(r[0].indexOf(q)>-1||norm(r[1]).indexOf(q)>-1)return true;var ks=IND_KEYS[r[0]]||[];for(var i=0;i<ks.length;i++)if(ks[i].indexOf(q)>-1||q.indexOf(ks[i])>-1)return true;return false}
+function indMatch(r,q){if(r[0].indexOf(q)>-1||norm(r[1]).indexOf(q)>-1)return true;var ks=IND_KEYS[r[0]]||[];for(var i=0;i<ks.length;i++)if(ks[i].indexOf(q)>-1||q.indexOf(ks[i])>-1)return true;return matchTokens(q,r[0]+" "+r[1]+" "+ks.join(" ")+" "+(r[3]||""))}
 var SHORT={dntn:"Sở hữu bởi 1 cá nhân, chịu trách nhiệm vô hạn",tnhh1:"Do 1 tổ chức hoặc cá nhân làm chủ, trách nhiệm hữu hạn",tnhh2:"Từ 2–50 thành viên, trách nhiệm hữu hạn",ctcp:"Vốn điều lệ chia thành cổ phần, dễ chuyển nhượng",hopdanh:"Thành viên hợp danh chịu trách nhiệm vô hạn, liên đới",hkd:"Đăng ký tại cấp xã, hồ sơ gọn nhất, không phải doanh nghiệp",htx:"Kinh tế tập thể, từ 5 thành viên, đăng ký tại cấp xã",lhhtx:"Do ít nhất 3 hợp tác xã liên kết thành lập, đăng ký tại cấp xã",phuthuoc:"Đơn vị phụ thuộc của doanh nghiệp — không phải doanh nghiệp mới"};
 var FORM_FILES={
 "1":{f:"mau-so-01.docx",n:"Mẫu số 1"},
@@ -566,7 +566,7 @@ function gotoFilter(f){setFilter(f);showView('thutuc')}
 function setFilter(f){curF=f;var bs=document.querySelectorAll("#procFilters .chip");for(var i=0;i<bs.length;i++)bs[i].classList.toggle("active",bs[i].dataset.f===f);renderProcs()}
 function renderProcs(){
  var q=norm(document.getElementById("procQ").value||"");
- var list=PROCS.map(function(p,i){p.i=i;return p}).filter(function(p){return (curF==="all"||p.c===curF)&&(!q||norm(p.t).indexOf(q)>-1)});
+ var list=PROCS.map(function(p,i){p.i=i;return p}).filter(function(p){return (curF==="all"||p.c===curF)&&(!q||matchTokens(q,p.t+" "+p.d))});
  document.getElementById("procGrid").innerHTML=list.map(function(p){return '<button class="proc '+(p.i===curProc?'active':'')+'" onclick="showProc('+p.i+')"><h3>'+p.t+'</h3></button>'}).join("")||'<p class="small">Không thấy thủ tục khớp. Thử từ khóa ngắn hơn hoặc chọn nhóm khác.</p>';
  if(list.length){var found=false;for(var i=0;i<list.length;i++)if(list[i].i===curProc)found=true;showProc(found?curProc:list[0].i,true)}
 }
@@ -584,6 +584,10 @@ function renderInd(){
  document.getElementById("indMore").style.display=(!indShowAll&&list.length>10)?"":"none";
 }
 function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").trim()}
+function wordSet(s){var o={},ws=norm(s).split(/[^a-z0-9]+/);for(var i=0;i<ws.length;i++)if(ws[i])o[ws[i]]=1;return o}
+function matchTokens(q,hay){var h=norm(hay);if(q&&h.indexOf(q)>-1)return true;var ws=(q||"").split(/[^a-z0-9]+/).filter(function(w){return w});if(ws.length<2)return false;var set=wordSet(hay);for(var i=0;i<ws.length;i++)if(!set[ws[i]])return false;return true}
+function procSearchMatch(p,q){if(norm(p.t).indexOf(q)>-1)return true;var ws=(q||"").split(/[^a-z0-9]+/).filter(function(w){return w});if(ws.length<2)return false;if(matchTokens(q,p.t+" "+p.d))return true;if(ws.length<3)return false;var tset=wordSet(p.t),tin=0;for(var i=0;i<ws.length;i++)if(tset[ws[i]])tin++;if(tin<3)return false;return matchTokens(q,p.t+" "+p.d+" "+(p.docs||[]).join(" ")+" "+(p.note||""))}
+function procScore(p,q){var set=wordSet(p.t),ws=(q||"").split(/[^a-z0-9]+/).filter(function(w){return w}),s=norm(p.t).indexOf(q)>-1?10:0;for(var i=0;i<ws.length;i++)if(set[ws[i]])s++;return s}
 var ALIASES=[
 {k:["mo quan an","quan an","mo quan","ban do an","quan ca phe","ca phe","cafe","mo tiem","mo quan nhau","nha hang","dich vu an uong"],p:"Đăng ký thành lập hộ kinh doanh",i:"5610"},
 {k:["mo ho kinh doanh","lap ho kinh doanh","dang ky ho kinh doanh"],p:"Đăng ký thành lập hộ kinh doanh"},
@@ -614,10 +618,11 @@ function goSearch(e){e.preventDefault();var raw=document.getElementById("q").val
   if(ALIASES[a].i)indSet[ALIASES[a].i]=1;
   if(ALIASES[a].g)PROCS.forEach(function(p,pi2){if(p.c===ALIASES[a].g)procSet[pi2]=1});
   if(ALIASES[a].v)viewTarget=ALIASES[a].v}
- PROCS.forEach(function(p,i){if(norm(p.t).indexOf(q)>-1)procSet[i]=1});
- TYPES.forEach(function(t,i){if(norm(t.name).indexOf(q)>-1)typeSet[i]=1});
+ PROCS.forEach(function(p,i){if(procSearchMatch(p,q))procSet[i]=1});
+ TYPES.forEach(function(t,i){if(matchTokens(q,t.name+" "+t.tag))typeSet[i]=1});
  INDS.forEach(function(r){if(indMatch(r,q))indSet[r[0]]=1});
  var procList=Object.keys(procSet).map(Number),indList=INDS.filter(function(r){return indSet[r[0]]}),typeList=Object.keys(typeSet).map(Number);
+ procList.sort(function(a,b){return procScore(PROCS[b],q)-procScore(PROCS[a],q)||a-b});
  if(!procList.length&&!indList.length&&!typeList.length){
   if(viewTarget){msg.textContent="Chọn loại hình phù hợp bên dưới để xem hồ sơ thành lập.";showView(viewTarget);return false}
   msg.textContent="Không tìm thấy kết quả cho “"+raw.trim()+"”.";
