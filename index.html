@@ -209,8 +209,10 @@ th{background:var(--blue);color:#fff}
 @media(max-width:860px){.steps3{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.steps3{grid-template-columns:1fr}}
 .step{border:1px solid var(--line);border-radius:var(--r);padding:14px;background:#fff}
-.step b.num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;margin-bottom:8px}
-.step p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.stephead{display:flex;align-items:flex-start;gap:10px}
+.step b.num{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;margin:0}
+.stephead>b:not(.num){flex:1 1 auto;min-width:0;line-height:1.35;padding-top:5px}
+.step p{margin:8px 0 0;font-size:13.5px;color:var(--muted)}
 .support{background:var(--blue);color:#fff;border-radius:var(--r);padding:16px;margin:20px 0 4px}
 .support h2{color:#fff}
 .support p{color:#dcefff;max-width:680px;margin:0 0 10px}
@@ -410,9 +412,9 @@ footer .fver{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,
 <div style="margin-top:26px">
 <h2>Hướng dẫn thực hiện thủ tục</h2>
 <div class="steps steps3">
-<div class="step"><b class="num">1</b><b>Chuẩn bị</b><p>Chọn đúng thủ tục và đúng loại hình; thành lập mới thì tra cứu tên trước. Soạn hồ sơ theo mẫu hiện hành, ký đúng thẩm quyền, scan PDF rõ nét — mỗi văn bản một tệp. Nộp qua mạng cần thêm tài khoản VNeID mức độ 2 và tài khoản thanh toán điện tử.</p></div>
-<div class="step"><b class="num">2</b><b>Nộp hồ sơ</b><p>Nộp trực tiếp tại cơ quan đăng ký kinh doanh (doanh nghiệp: cấp tỉnh; hộ kinh doanh, hợp tác xã: cấp xã), hoặc nộp qua mạng: tạo hồ sơ đúng loại, kê khai từng khối, tải tài liệu đính kèm, bấm “Chuẩn bị” để xử lý hết cảnh báo, rồi ký, nộp và thanh toán lệ phí (nếu có).</p></div>
-<div class="step"><b class="num">3</b><b>Nhận kết quả</b><p>Theo dõi tình trạng hồ sơ trên cổng. Nếu hồ sơ ở trạng thái “Chờ bổ sung”, mở thông báo yêu cầu sửa đổi, bổ sung, sửa đúng các lý do đã nêu và nộp lại trong thời hạn ghi trong thông báo. Hồ sơ hợp lệ được cấp Giấy chứng nhận trong 3 ngày làm việc.</p></div>
+<div class="step"><div class="stephead"><b class="num">1</b><b>Chuẩn bị</b></div><p>Chọn đúng thủ tục và đúng loại hình; thành lập mới thì tra cứu tên trước. Soạn hồ sơ theo mẫu hiện hành, ký đúng thẩm quyền, scan PDF rõ nét — mỗi văn bản một tệp. Nộp qua mạng cần thêm tài khoản VNeID mức độ 2 và tài khoản thanh toán điện tử.</p></div>
+<div class="step"><div class="stephead"><b class="num">2</b><b>Nộp hồ sơ</b></div><p>Nộp trực tiếp tại cơ quan đăng ký kinh doanh (doanh nghiệp: cấp tỉnh; hộ kinh doanh, hợp tác xã: cấp xã), hoặc nộp qua mạng: tạo hồ sơ đúng loại, kê khai từng khối, tải tài liệu đính kèm, bấm “Chuẩn bị” để xử lý hết cảnh báo, rồi ký, nộp và thanh toán lệ phí (nếu có).</p></div>
+<div class="step"><div class="stephead"><b class="num">3</b><b>Nhận kết quả</b></div><p>Theo dõi tình trạng hồ sơ trên cổng. Nếu hồ sơ ở trạng thái “Chờ bổ sung”, mở thông báo yêu cầu sửa đổi, bổ sung, sửa đúng các lý do đã nêu và nộp lại trong thời hạn ghi trong thông báo. Hồ sơ hợp lệ được cấp Giấy chứng nhận trong 3 ngày làm việc.</p></div>
 </div>
 </div>
 </section>
@@ -498,11 +500,11 @@ footer .fver{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,
 <h2>Nộp hồ sơ qua mạng bằng VNeID</h2>
 <p style="margin:0 0 12px">Cổng nộp hồ sơ: <a href="https://dangkyquamang.dkkd.gov.vn" target="_blank" rel="noopener"><b>dangkyquamang.dkkd.gov.vn</b></a> — đăng nhập bằng VNeID mức độ 2.</p>
 <div class="steps">
-<div class="step"><b class="num">1</b><b>Chuẩn bị hồ sơ giấy</b><p>Đúng mẫu hiện hành, ký đúng thẩm quyền, scan PDF rõ nét, mỗi văn bản một tệp.</p></div>
-<div class="step"><b class="num">2</b><b>Tạo hồ sơ đúng loại</b><p>Đọc kỹ hồ sơ giấy để chọn đúng loại hình và đúng thủ tục trước khi tạo; chọn phương thức nộp hồ sơ trên cổng.</p></div>
-<div class="step"><b class="num">3</b><b>Kê khai từng khối</b><p>Ngành nghề có chữ “Chi tiết:”; khối Vốn điền cả Nguồn vốn điều lệ và Tài sản góp vốn; đối chiếu thông tin cá nhân với Cơ sở dữ liệu quốc gia về dân cư khi hệ thống yêu cầu.</p></div>
-<div class="step"><b class="num">4</b><b>Người nộp &amp; ủy quyền</b><p>Có ủy quyền: nhập khối Người nộp trước, rồi mới nhập khối Ủy quyền.</p></div>
-<div class="step"><b class="num">5</b><b>Đính kèm file, bấm “Chuẩn bị” &amp; nộp</b><p>Đính kèm từng tệp PDF vào đúng mục tài liệu của hồ sơ. “Chuẩn bị” báo hết lỗi còn ẩn — hết cảnh báo đỏ mới ký, nộp và thanh toán lệ phí (nếu có).</p></div>
+<div class="step"><div class="stephead"><b class="num">1</b><b>Chuẩn bị hồ sơ giấy</b></div><p>Đúng mẫu hiện hành, ký đúng thẩm quyền, scan PDF rõ nét, mỗi văn bản một tệp.</p></div>
+<div class="step"><div class="stephead"><b class="num">2</b><b>Tạo hồ sơ đúng loại</b></div><p>Đọc kỹ hồ sơ giấy để chọn đúng loại hình và đúng thủ tục trước khi tạo; chọn phương thức nộp hồ sơ trên cổng.</p></div>
+<div class="step"><div class="stephead"><b class="num">3</b><b>Kê khai từng khối</b></div><p>Ngành nghề có chữ “Chi tiết:”; khối Vốn điền cả Nguồn vốn điều lệ và Tài sản góp vốn; đối chiếu thông tin cá nhân với Cơ sở dữ liệu quốc gia về dân cư khi hệ thống yêu cầu.</p></div>
+<div class="step"><div class="stephead"><b class="num">4</b><b>Người nộp &amp; ủy quyền</b></div><p>Có ủy quyền: nhập khối Người nộp trước, rồi mới nhập khối Ủy quyền.</p></div>
+<div class="step"><div class="stephead"><b class="num">5</b><b>Đính kèm file, bấm “Chuẩn bị” &amp; nộp</b></div><p>Đính kèm từng tệp PDF vào đúng mục tài liệu của hồ sơ. “Chuẩn bị” báo hết lỗi còn ẩn — hết cảnh báo đỏ mới ký, nộp và thanh toán lệ phí (nếu có).</p></div>
 </div>
 <div class="card" style="margin-top:14px"><h3>Video hướng dẫn trên Cổng thông tin quốc gia về đăng ký doanh nghiệp</h3><ul class="docs"><li><a href="https://youtu.be/LMSXfhlSwcc" target="_blank" rel="noopener">Video: Cập nhật địa chỉ do thay đổi địa giới hành chính</a></li><li><a href="https://youtu.be/AE-OMTVqU-Q" target="_blank" rel="noopener">Video: Thay đổi nội dung đăng ký doanh nghiệp</a></li><li><a href="https://youtu.be/jxsim6HyacU" target="_blank" rel="noopener">Video: Tạm ngừng hoạt động doanh nghiệp</a></li><li><a href="https://youtu.be/rdfn9xUS8q8" target="_blank" rel="noopener">Video: Thông báo quyết định giải thể doanh nghiệp</a></li><li><a href="https://youtu.be/28bvTZ7BywM" target="_blank" rel="noopener">Video: Giải thể doanh nghiệp</a></li></ul><p style="margin:10px 0 0"><a href="https://dangkykinhdoanh.gov.vn/vn/tin-tuc/611/6827/huong-dan-dang-ky-doanh-nghiep-qua-mang-dien-tu.aspx" target="_blank" rel="noopener"><b>Toàn bộ tài liệu hướng dẫn đăng ký qua mạng →</b></a></p></div>
 <div class="card" style="margin-top:14px"><h3>Checklist trước khi bấm nộp</h3><ul class="docs">
