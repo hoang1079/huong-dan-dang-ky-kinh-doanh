@@ -281,6 +281,35 @@ footer a:hover{color:#ffe98a}
 footer .fline{margin:4px 0}
 footer .fver{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.22);color:#a9d2ee;font-size:12.5px}
 @media(max-width:640px){header .wrap{padding-top:10px;padding-bottom:12px}.hero{padding:0;margin-top:0}.hero h1{font-size:19px;white-space:nowrap}.bigsearch button{padding:0 14px}.task{padding:5px 4px 5px}.htype{padding:16px 10px 14px}.detail{padding:16px}.proc{padding:12px 14px}section{padding:18px 0 2px}}
+.chatfab{position:fixed;right:16px;bottom:16px;z-index:120;display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:0;border-radius:999px;padding:0 18px;min-height:50px;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 8px 24px rgba(0,50,90,.35)}
+.chatfab:hover{background:var(--blue-d)}
+.chatfab:focus-visible{outline:2px solid var(--blue-d);outline-offset:2px}
+.chatpanel{position:fixed;right:16px;bottom:76px;z-index:120;width:min(392px,calc(100vw - 24px));height:min(600px,calc(100dvh - 112px));display:none;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 48px rgba(0,40,70,.32);overflow:hidden}
+.chatpanel.open{display:flex}
+.chathead{background:var(--blue-d);color:#fff;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.chathead b{display:block;font-size:16px;line-height:1.3}
+.chathead span{display:block;font-size:12.5px;color:#cfe8fa;line-height:1.4;margin-top:2px}
+.chatx{margin-left:auto;flex:0 0 auto;background:rgba(255,255,255,.14);border:0;color:#fff;width:36px;height:36px;min-height:36px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.chatx:hover{background:rgba(255,255,255,.28)}
+.chatbody{flex:1;overflow-y:auto;padding:12px;background:var(--soft);display:flex;flex-direction:column;gap:8px}
+.cmsg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:14.5px;line-height:1.55;overflow-wrap:anywhere}
+.cmsg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.cmsg.me{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+.cmsg ul{margin:6px 0 2px;padding-left:18px}
+.cmsg li{margin-bottom:3px}
+.cbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.cbtn{border:1px solid var(--blue);color:var(--blue-d);background:#fff;border-radius:999px;padding:7px 12px;min-height:36px;font-weight:700;font-size:13.5px;cursor:pointer;text-align:left}
+.cbtn:hover{background:var(--soft2)}
+.cbtn.solid{background:var(--blue);color:#fff}
+.cbtn.solid:hover{background:var(--blue-d)}
+.chatchips{display:flex;gap:6px;flex-wrap:wrap;padding:9px 12px 2px;background:#fff;border-top:1px solid var(--line)}
+.chatform{display:flex;gap:8px;padding:10px 12px 12px;background:#fff}
+.chatform input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:9px;padding:0 12px;min-height:44px;font-size:15px;color:var(--ink);background:#fff}
+.chatform input:focus{border-color:var(--blue);outline:0}
+.chatform button{flex:0 0 auto;background:var(--blue);color:#fff;border:0;border-radius:9px;padding:0 16px;min-height:44px;font-weight:700;cursor:pointer}
+.chatform button:hover{background:var(--blue-d)}
+@media(max-width:640px){.chatpanel{right:8px;left:8px;width:auto;bottom:74px;height:min(72dvh,600px)}.chatfab{right:12px;bottom:12px}}
+@media print{.chatfab,.chatpanel{display:none!important}}
 </style>
 </head>
 <body id="top">
@@ -663,6 +692,14 @@ footer .fver{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,
 </div></footer>
 
 <div class="dltoast" id="dlToast" role="status" aria-live="polite"></div>
+
+<button class="chatfab" id="chatFab" onclick="chatToggle()" aria-expanded="false" aria-controls="chatPanel" aria-label="Trợ lý hỏi đáp"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Trợ lý hỏi đáp</button>
+<div class="chatpanel" id="chatPanel" role="dialog" aria-label="Trợ lý hỏi đáp đăng ký kinh doanh">
+<div class="chathead"><div><b>Trợ lý hỏi đáp</b><span>Trả lời tự động theo đúng dữ liệu đã có trên trang này: thủ tục, hồ sơ, lệ phí, thời hạn và ngành nghề.</span></div><button class="chatx" onclick="chatToggle(true)" aria-label="Đóng khung hỏi đáp">✕</button></div>
+<div class="chatbody" id="chatBody" aria-live="polite"></div>
+<div class="chatchips" id="chatChips"></div>
+<form class="chatform" onsubmit="return chatSend(event)"><input id="chatInput" type="text" placeholder="Nhập câu hỏi, ví dụ: thành lập TNHH cần hồ sơ gì?" aria-label="Nhập câu hỏi" autocomplete="off"><button type="submit">Gửi</button></form>
+</div>
 <script>
 var ICONS={
 dntn:'<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0067ac" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="7.5" r="3.4"/><path d="M5.5 20c.8-3.6 3.4-5.4 6.5-5.4s5.7 1.8 6.5 5.4"/></svg>',
@@ -1062,6 +1099,127 @@ var dlTimer=null;
 document.addEventListener("click",function(e){var a=e.target.closest?e.target.closest("a[data-dl]"):null;if(!a)return;var f=a.getAttribute("data-dl");if(!f)return;e.preventDefault();var t=document.createElement("a");t.href=f;t.download=a.getAttribute("download")||f;document.body.appendChild(t);t.click();if(t.parentNode)t.parentNode.removeChild(t);});
 document.addEventListener("click",function(e){var a=e.target.closest?e.target.closest("a[download]"):null;if(!a)return;var t=document.getElementById("dlToast");if(!t)return;var label=a.getAttribute("download")||"file";t.textContent="Đang tải về máy: "+label; t.classList.add("show");if(dlTimer)clearTimeout(dlTimer);dlTimer=setTimeout(function(){t.classList.remove("show")},3200)});
 var startView=(location.hash||"").replace("#","");if(VIEWS.indexOf(startView)>-1&&startView!=="trangchu"&&startView!=="chonloai"&&startView!=="catproc")showView(startView);
+</script>
+<script>
+/* ===== Tro ly hoi dap: tra cuu dung du lieu tren trang, khong goi API ===== */
+var chatOpened=false;
+function chatEsc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function chatToggle(forceClose){
+ var p=document.getElementById("chatPanel"),f=document.getElementById("chatFab");
+ var open=forceClose===true?false:!p.classList.contains("open");
+ p.classList.toggle("open",open);f.setAttribute("aria-expanded",open?"true":"false");
+ if(open){if(!chatOpened){chatOpened=true;chatBot('Xin chào! Tôi tra cứu <b>đúng dữ liệu đã có trên trang này</b> — thủ tục, thành phần hồ sơ, lệ phí, thời hạn và mã ngành nghề. Bạn cần làm việc gì?');chatChips(["Thành lập TNHH một thành viên cần hồ sơ gì?","Lệ phí đăng ký doanh nghiệp bao nhiêu?","Nộp hồ sơ qua mạng thế nào?","Tạm ngừng kinh doanh làm sao?","Mã ngành dịch vụ ăn uống là gì?"])}
+  var inp=document.getElementById("chatInput");if(inp)setTimeout(function(){inp.focus()},60)}
+}
+function chatAdd(cls,html){var b=document.getElementById("chatBody");var d=document.createElement("div");d.className="cmsg "+cls;d.innerHTML=html;b.appendChild(d);b.scrollTop=b.scrollHeight;return d}
+function chatBot(html){return chatAdd("bot",html)}
+function chatChips(list){var c=document.getElementById("chatChips");c.innerHTML=list.map(function(t){return '<button type="button" class="cbtn" onclick="chatAsk(this.getAttribute(\'data-q\'))" data-q="'+chatEsc(t)+'">'+chatEsc(t)+'</button>'}).join("")}
+function chatAsk(t){var inp=document.getElementById("chatInput");inp.value=t;chatSend(null)}
+function chatOpenProc(i){chatToggle(true);openProcIdx(i)}
+function chatGoType(id){chatToggle(true);pickType(id)}
+function chatOpenInd(code){chatToggle(true);openInd(code)}
+function chatGoView(v){chatToggle(true);showView(v)}
+function chatProcBtn(i,solid){return '<button type="button" class="cbtn'+(solid?" solid":"")+'" onclick="chatOpenProc('+i+')">Xem chi tiết: '+chatEsc(PROCS[i].t)+'</button>'}
+function chatProcAnswer(i){
+ var p=PROCS[i];
+ var h='<b>'+chatEsc(p.t)+'</b>'+(p.d?' — '+chatEsc(p.d):'')+'<br>Hồ sơ gồm:<ul>'+p.docs.map(function(d){return '<li>'+chatEsc(d)+'</li>'}).join("")+'</ul>';
+ try{h+='<b>Lệ phí:</b> '+chatEsc(procFee(p))+'<br><b>Thời hạn giải quyết:</b> '+chatEsc(procTime(p))+'<br><b>Nộp hồ sơ:</b> qua mạng bằng tài khoản VNeID mức độ 2, hoặc nộp trực tiếp tại cơ quan đăng ký kinh doanh.'}catch(e){}
+ if(p.note)h+='<br><b>Lưu ý:</b> '+chatEsc(p.note);
+ h+='<div class="cbtns">'+chatProcBtn(i,true)+'</div><span style="color:var(--muted);font-size:13px">Bấm nút trên để xem chi tiết và tải biểu mẫu của thủ tục này.</span>';
+ return h;
+}
+var CHAT_FAQ=[
+{k:["ten doanh nghiep","dat ten","trung ten","ten cong ty"],a:'Tên doanh nghiệp gồm loại hình + tên riêng, không được trùng hoặc gây nhầm lẫn với doanh nghiệp đã đăng ký trên toàn quốc. Nên tra cứu tên dự kiến trước tại dangkykinhdoanh.gov.vn. Không dùng tên cơ quan nhà nước, từ ngữ vi phạm thuần phong mỹ tục.'},
+{k:["chung cu","can ho","tru so o dau","dat tru so"],a:'Không được đặt trụ sở tại căn hộ chung cư có mục đích để ở. Nhà riêng, văn phòng, tòa nhà hỗn hợp có chức năng văn phòng thì được. Lưu ý: địa chỉ thay đổi do đổi tên xã/phường, tỉnh sau sáp nhập là nội dung <b>cập nhật</b>, không phải thay đổi địa chỉ trụ sở.'},
+{k:["cho bo sung","bi tra ho so","ho so bi tra","sua doi bo sung"],a:'Khi hồ sơ ở trạng thái “Chờ bổ sung”, hãy đọc kỹ <b>Thông báo yêu cầu sửa đổi, bổ sung</b> — cơ quan đăng ký kinh doanh ghi rõ từng lý do. Chỉ cần khắc phục đúng các lý do đã nêu rồi nộp lại trong thời hạn ghi trong thông báo; thay đổi thêm nội dung khác có thể phát sinh yêu cầu sửa tiếp.'},
+{k:["mau 12 chua ky","mau 12 khong ky","chua ky mau"],a:'“Mẫu 12 chưa ký” không phải lúc nào cũng là lỗi. Nếu người nộp chính là người có thẩm quyền ký và nội dung đã kê khai trên hệ thống thì không yêu cầu ký văn bản đó. Chỉ là lỗi khi người nộp là người được ủy quyền.'},
+{k:["ho kinh doanh hay","nen mo ho kinh doanh","ho kinh doanh khac","khac nhau giua ho kinh doanh"],a:'<b>Hộ kinh doanh:</b> hồ sơ gọn, đăng ký tại cấp xã, nộp thuế theo phương pháp kê khai theo doanh thu thực tế (không còn thuế khoán từ 01/01/2026) — nhưng chủ hộ chịu trách nhiệm bằng toàn bộ tài sản, không có tư cách pháp nhân, mỗi cá nhân/hộ gia đình chỉ được đăng ký một hộ kinh doanh trên toàn quốc.<br><b>Doanh nghiệp (ví dụ TNHH một thành viên):</b> có tư cách pháp nhân, trách nhiệm hữu hạn — phù hợp khi quy mô lớn dần, cần tách bạch tài sản cá nhân, xuất hóa đơn thường xuyên hoặc gọi thêm người góp vốn. Hộ kinh doanh đã đăng ký được chuyển đổi thành doanh nghiệp.'},
+{k:["chi nhanh khac","van phong dai dien khac","dia diem kinh doanh khac","khac nhau the nao giua chi nhanh"],a:'<b>Chi nhánh:</b> được kinh doanh đúng ngành nghề của doanh nghiệp, có thể hạch toán độc lập.<br><b>Văn phòng đại diện:</b> chỉ giao dịch, xúc tiến, đại diện theo ủy quyền — không trực tiếp kinh doanh.<br><b>Địa điểm kinh doanh:</b> nơi tiến hành hoạt động kinh doanh cụ thể như cửa hàng, kho, xưởng; có thể đặt tại tỉnh khác với nơi đặt trụ sở chính hoặc chi nhánh — gửi thông báo lập địa điểm kinh doanh đến cơ quan đăng ký kinh doanh cấp tỉnh nơi đặt địa điểm trong 10 ngày kể từ ngày quyết định lập.<br>Cả ba đều là đơn vị phụ thuộc, không phải doanh nghiệp mới.'},
+{k:["hop tac xa khac","htx khac cong ty"],a:'Hợp tác xã là tổ chức kinh tế tập thể của ít nhất 5 thành viên chính thức, có tư cách pháp nhân; thành viên góp vốn nhưng biểu quyết theo nguyên tắc một thành viên một phiếu, không theo tỷ lệ vốn góp như công ty. Đăng ký tại cơ quan đăng ký kinh doanh cấp xã, kê khai qua Hệ thống thông tin về đăng ký hợp tác xã — không đăng ký trên Cổng thông tin quốc gia về đăng ký doanh nghiệp như công ty.'},
+{k:["con dau","khac dau","mau dau"],a:'Doanh nghiệp tự quyết định hình thức, số lượng và nội dung con dấu, tự quản lý việc sử dụng con dấu. Không còn phải thông báo mẫu dấu với cơ quan đăng ký kinh doanh như trước đây.'},
+{k:["giay phep con","nganh co dieu kien","nganh nghe co dieu kien","dieu kien kinh doanh"],a:'Một số ngành nghề (ăn uống, lưu trú, vận tải, y tế…) chỉ được hoạt động khi đáp ứng điều kiện và có thêm giấy phép chuyên ngành. Đăng ký ngành nghề xong chưa đủ — phải xin đủ giấy phép con trước khi bắt đầu hoạt động.'},
+{k:["nguoi dai dien theo phap luat la ai","nguoi dai dien la ai"],a:'Người đại diện theo pháp luật là người được ghi trong Giấy chứng nhận đăng ký doanh nghiệp, có thẩm quyền ký các văn bản đề nghị, thông báo đăng ký doanh nghiệp và đại diện doanh nghiệp trước pháp luật. Đổi người đại diện phải làm thủ tục thay đổi nội dung đăng ký.'},
+{k:["thanh lap xong","sau khi thanh lap","sau thanh lap","mo cong ty xong","viec can lam sau"],a:'Sau khi thành lập, cần làm tiếp:<ul><li>Công bố nội dung đăng ký doanh nghiệp (phí công bố 100.000đ/lần khi thành lập mới)</li><li>Góp đủ vốn điều lệ trong <b>90 ngày</b> kể từ ngày cấp Giấy chứng nhận</li><li>Treo biển hiệu tại trụ sở chính</li><li>Mở tài khoản ngân hàng cho doanh nghiệp</li><li>Đăng ký chữ ký số và hóa đơn điện tử</li><li>Kê khai thuế ban đầu với cơ quan thuế quản lý trực tiếp</li><li>Khắc dấu doanh nghiệp (tự quyết định hình thức, số lượng)</li><li>Lưu Điều lệ, danh sách thành viên/cổ đông tại trụ sở</li><li>Khi có lao động: ký hợp đồng lao động, đăng ký bảo hiểm xã hội, bảo hiểm y tế</li></ul>'}
+];
+var VON_KEYS=[["lien hiep hop tac xa","lien hiep"],["mot thanh vien","tnhh 1","tnhh mot"],["hai thanh vien","tnhh 2","tnhh hai"],["doanh nghiep tu nhan","tu nhan"],["co phan"],["hop danh"],["ho kinh doanh"],["hop tac xa"]];
+function chatVonTypeIdx(q){for(var i=0;i<VON_KEYS.length;i++){for(var j=0;j<VON_KEYS[i].length;j++)if(q.indexOf(VON_KEYS[i][j])>-1){var lab=VON_KEYS[i][0];for(var v=0;v<VON_TYPES.length;v++){var nl=norm(VON_TYPES[v].label);if(lab==="lien hiep hop tac xa"&&nl.indexOf("lien hiep")>-1)return v;if(lab!=="lien hiep hop tac xa"&&nl.indexOf(lab)>-1)return v}return -1}}return -1}
+function chatAnswer(raw){
+ var q=norm(raw);
+ if(!q)return;
+ if(["xin chao","chao","hello","hi","chao ban","alo"].indexOf(q)>-1||q.indexOf("xin chao")===0){chatBot('Xin chào! Bạn cứ nhập việc cần làm, ví dụ “thành lập công ty cổ phần”, “đổi người đại diện” hoặc “mã ngành 5610”. Tôi sẽ tra đúng dữ liệu trên trang để trả lời.');return}
+ if(q.indexOf("cam on")>-1){chatBot('Không có gì. Bạn cần tra thêm thủ tục hay ngành nghề nào nữa cứ nhập tiếp nhé.');return}
+ /* Lien he — thong tin co san o chan trang va muc Zalo tren trang */
+ if(q.indexOf("zalo")>-1||q.indexOf("lien he")>-1||q.indexOf("so dien thoai")>-1||q.indexOf("dien thoai")>-1||q.indexOf("email")>-1){
+  chatBot('<b>Phòng Đăng ký kinh doanh — Phòng Tài chính tỉnh Quảng Ngãi</b><br>Địa chỉ: 238 Phan Bội Châu, phường Cẩm Thành, tỉnh Quảng Ngãi<br>Điện thoại: <a href="tel:+842553822730">0255 382 2730</a><br>Email: <a href="mailto:dangkykinhdoanhqn@gmail.com">dangkykinhdoanhqn@gmail.com</a><br>Zalo chính thức: <b>0385 384 564</b><div class="cbtns"><a class="cbtn solid" style="text-decoration:none" href="https://zalo.me/0385384564" target="_blank" rel="noopener">Mở Zalo 0385 384 564 ↗</a></div>');return}
+ /* Von dieu le: hoi kem loai hinh thi tra loi theo loai hinh do */
+ if(q.indexOf("von")>-1){
+  var vi=chatVonTypeIdx(q);
+  if(vi>-1&&typeof VON_TYPES!=="undefined"){
+   var vt=VON_TYPES[vi];var pi=procIdxByTitle(vt.proc);
+   var hh='<b>'+chatEsc(vt.label)+' — '+chatEsc(vt.sub)+'</b><br>'+chatEsc(vt.note);
+   if(pi>-1)hh+='<div class="cbtns">'+chatProcBtn(pi,true)+'</div>';
+   chatBot(hh);return}
+  if(typeof isVonAsk==="function"&&isVonAsk(q)){
+   chatBot('Thay đổi vốn có thủ tục riêng cho từng loại hình. Bạn thuộc loại hình nào? Bấm chọn bên dưới, hoặc gõ rõ hơn, ví dụ “tăng vốn TNHH một thành viên”.');
+   chatChips(VON_TYPES.map(function(v){return "Thay đổi vốn "+v.label}));return}
+ }
+ /* Nop qua mang / VNeID */
+ if(q.indexOf("qua mang")>-1||q.indexOf("nop truc tuyen")>-1||q.indexOf("nop online")>-1||q.indexOf("vneid")>-1||q.indexOf("dangkyquamang")>-1){
+  chatBot('Nộp hồ sơ qua mạng tại <a href="https://dangkyquamang.dkkd.gov.vn" target="_blank" rel="noopener"><b>dangkyquamang.dkkd.gov.vn</b></a>, đăng nhập bằng <b>VNeID mức độ 2</b>, theo 5 bước:<ul><li><b>1.</b> Chuẩn bị hồ sơ giấy đúng mẫu, ký đúng thẩm quyền, scan PDF rõ nét — mỗi văn bản một tệp</li><li><b>2.</b> Tạo hồ sơ đúng loại hình và đúng thủ tục</li><li><b>3.</b> Kê khai từng khối (ngành nghề, vốn, thông tin cá nhân đối chiếu với Cơ sở dữ liệu quốc gia về dân cư)</li><li><b>4.</b> Có ủy quyền: nhập khối Người nộp trước, rồi mới nhập khối Ủy quyền</li><li><b>5.</b> Đính kèm tệp, bấm “Chuẩn bị” xử lý hết cảnh báo đỏ, rồi ký, nộp và thanh toán lệ phí (nếu có)</li></ul>Hồ sơ hợp lệ được cấp Giấy chứng nhận trong 3 ngày làm việc.<div class="cbtns"><button type="button" class="cbtn solid" onclick="chatGoView(\'nopmang\')">Xem hướng dẫn nộp qua mạng</button></div>');return}
+ /* Hoi ve loai hinh doanh nghiep */
+ if(q.indexOf("loai hinh")>-1){
+  chatBot('Trang có hướng dẫn cho các loại hình sau — bấm vào loại hình để xem hồ sơ thành lập chi tiết:<div class="cbtns">'+TYPES.map(function(t){return '<button type="button" class="cbtn" onclick="chatGoType(\''+t.id+'\')"><b>'+chatEsc(t.name)+'</b> — '+chatEsc(t.tag)+'</button>'}).join("")+'</div>Ngoài ra còn có hộ kinh doanh, hợp tác xã và đơn vị phụ thuộc — cứ gõ tên việc cần làm, ví dụ “đăng ký thành lập hộ kinh doanh”.');return}
+ /* Cau hoi kien thuc thuong gap: chi tra loi som khi cau hoi khong kem ten mot thu tuc cu the */
+ var ACTW=["thay doi","doi ten","dang ky","thanh lap","tam ngung","giai the","cap lai","tang von","giam von","chuyen doi","them nganh","bo sung nganh","hieu dinh","cap nhat","mo them","dong cua"];
+ var hasAct=false;ACTW.forEach(function(w){if(q.indexOf(w)>-1)hasAct=true});
+ if(q.indexOf("thanh lap xong")>-1||q.indexOf("sau khi thanh lap")>-1||q.indexOf("sau thanh lap")>-1){for(var fi=0;fi<CHAT_FAQ.length;fi++)if(CHAT_FAQ[fi].k.indexOf("thanh lap xong")>-1){chatBot(CHAT_FAQ[fi].a);return}}
+ if(q.indexOf("ho kinh doanh hay")>-1||q.indexOf("hay thanh lap doanh nghiep")>-1||q.indexOf("hay mo cong ty")>-1){for(var fj=0;fj<CHAT_FAQ.length;fj++)if(CHAT_FAQ[fj].k.indexOf("ho kinh doanh hay")>-1){chatBot(CHAT_FAQ[fj].a);return}}
+ if(!hasAct){var fHit=null;CHAT_FAQ.forEach(function(f){f.k.forEach(function(kw){if(q.indexOf(kw)>-1)fHit=f})});if(fHit){chatBot(fHit.a);return}}
+ /* Tra thu tuc + nganh nghe bang chinh ham tim kiem cua trang */
+ var procSet={},indSetA={},viewTarget=null,i,j;
+ try{for(var a=0;a<ALIASES.length;a++){var hit=false;for(j=0;j<ALIASES[a].k.length;j++)if(q.indexOf(ALIASES[a].k[j])>-1){hit=true;break}
+  if(!hit)continue;
+  if(ALIASES[a].p){var px=PROCS.findIndex(function(p){return p.t.indexOf(ALIASES[a].p)>-1});if(px>-1)procSet[px]=1}
+  if(ALIASES[a].i)indSetA[ALIASES[a].i]=1;
+  if(ALIASES[a].g)PROCS.forEach(function(p,p2){if(p.c===ALIASES[a].g)procSet[p2]=1});
+  if(ALIASES[a].v)viewTarget=ALIASES[a].v}
+ }catch(e){}
+ var procList=Object.keys(procSet).map(Number);
+ PROCS.forEach(function(p,idx){if(procSearchMatch(p,q))procList.indexOf(idx)<0&&procList.push(idx)});
+ if(!procList.length){var bw={},bws=0;PROCS.forEach(function(p,idx){var set=wordSet(p.t),ov=0;q.split(/[^a-z0-9]+/).forEach(function(w){if(w&&set[w])ov++});if(ov>bws){bws=ov;bw={};bw[idx]=1}else if(ov===bws&&ov>0)bw[idx]=1});if(bws>=3)procList=Object.keys(bw).map(Number)}
+ procList.sort(function(x,y){return procScore(PROCS[y],q)-procScore(PROCS[x],q)||x-y});
+ var indList=[];var qInd=q.replace(/ma nganh|ma so nganh|la gi|la ma|bao nhieu|nganh gi/g," ").replace(/\s+/g," ").trim();
+ try{INDS.forEach(function(r){if(indSetA[r[0]]||indMatch(r,q)||(qInd&&qInd!==q&&indMatch(r,qInd)))indList.push(r)})}catch(e){}
+ var faqBest=null,faqScore=0;
+ CHAT_FAQ.forEach(function(f){var s=0;f.k.forEach(function(kw){if(q.indexOf(kw)>-1)s++});if(s>faqScore){faqScore=s;faqBest=f}});
+ var wantsInd=/\d{4}/.test(raw)||q.indexOf("ma nganh")>-1||q.indexOf("ma so nganh")>-1;
+ var feeAsk=q.indexOf("le phi")>-1||q.indexOf("phi cong bo")>-1||q.indexOf("bao nhieu tien")>-1||q.indexOf("chi phi")>-1;
+ var timeAsk=q.indexOf("bao lau")>-1||q.indexOf("may ngay")>-1||q.indexOf("thoi han giai quyet")>-1||q.indexOf("thoi gian xu ly")>-1;
+ var codeM=raw.match(/\d{4,5}/);
+ if(codeM){var codeList=[];try{INDS.forEach(function(r){if(r[0]===codeM[0])codeList.push(r)})}catch(e){}
+  if(!codeList.length)try{INDS.forEach(function(r){if(r[0].indexOf(codeM[0])===0)codeList.push(r)})}catch(e){}
+  if(codeList.length){chatBot('Mã ngành <b>'+codeM[0]+'</b> trong Hệ thống ngành kinh tế Việt Nam (VSIC 2025):<div class="cbtns">'+codeList.slice(0,8).map(function(r){return '<button type="button" class="cbtn" onclick="chatOpenInd(\''+r[0]+'\')"><b>'+r[0]+'</b> — '+chatEsc(r[1])+'</button>'}).join("")+'</div><span style="color:var(--muted);font-size:13px">Bấm vào mã ngành để xem chi tiết, gồm cả các mã cấp 5.</span>');return}}
+ if(feeAsk){var SPEC=["thanh lap","thay doi","doi ten","doi dia chi","tam ngung","giai the","cap lai","tang von","giam von","chuyen doi","hieu dinh","mo ho kinh doanh","lap ho kinh doanh","thanh lap hop tac xa"];var hasSpec=false;SPEC.forEach(function(w){if(q.indexOf(w)>-1)hasSpec=true});
+  if(!hasSpec){chatBot('<b>Lệ phí đăng ký doanh nghiệp:</b> 25.000đ/lần khi nộp hồ sơ giấy đến hết 31/12/2026 (từ 01/01/2027: 50.000đ/lần) — <b>miễn khi nộp qua mạng</b>. Phí công bố nội dung đăng ký doanh nghiệp: 100.000đ/lần khi thành lập mới. Tạm ngừng, giải thể: không thu lệ phí.<br><b>Hộ kinh doanh, hợp tác xã:</b> do Hội đồng nhân dân cấp tỉnh quyết định, mỗi tỉnh một mức — phổ biến 100.000đ/lần cấp mới (liên hiệp hợp tác xã 200.000đ/lần), thay đổi thường 20.000–50.000đ/lần, nhiều địa phương miễn khi nộp trực tuyến.<br>Muốn biết lệ phí của một thủ tục cụ thể, cứ gõ tên thủ tục, ví dụ “lệ phí thành lập công ty cổ phần”.');return}}
+ if(wantsInd&&indList.length){
+  var top=indList.slice(0,6);
+  chatBot('Ngành nghề khớp với câu hỏi của bạn (VSIC 2025):<div class="cbtns">'+top.map(function(r){return '<button type="button" class="cbtn" onclick="chatOpenInd(\''+r[0]+'\')"><b>'+r[0]+'</b> — '+chatEsc(r[1])+'</button>'}).join("")+'</div><span style="color:var(--muted);font-size:13px">Bấm vào mã ngành để xem chi tiết tại mục Ngành nghề.</span>');return}
+ if(faqBest&&faqScore>=1&&!procList.length){chatBot(faqBest.a);return}
+ if(viewTarget&&!procList.length&&!indList.length){chatGoViewSoon(viewTarget);return}
+ if(procList.length){
+  var strong=procScore(PROCS[procList[0]],q);
+  if(procList.length===1||strong>=3){chatBot(chatProcAnswer(procList[0]));if(procList.length>1){chatBot('Các thủ tục liên quan khác:<div class="cbtns">'+procList.slice(1,4).map(function(ix){return chatProcBtn(ix)}).join("")+'</div>')}return}
+  chatBot('Tìm thấy '+procList.length+' thủ tục liên quan. Bấm vào thủ tục đúng với việc bạn cần làm để xem hồ sơ, lệ phí và thời hạn:<div class="cbtns">'+procList.slice(0,5).map(function(ix){return chatProcBtn(ix)}).join("")+'</div>');return}
+ if(faqBest&&faqScore>=1){chatBot(faqBest.a);return}
+ if(feeAsk){chatBot('<b>Lệ phí đăng ký doanh nghiệp:</b> 25.000đ/lần khi nộp hồ sơ giấy đến hết 31/12/2026 (từ 01/01/2027: 50.000đ/lần) — <b>miễn khi nộp qua mạng</b>. Phí công bố nội dung đăng ký doanh nghiệp: 100.000đ/lần khi thành lập mới. Tạm ngừng, giải thể: không thu lệ phí.<br><b>Hộ kinh doanh, hợp tác xã:</b> do Hội đồng nhân dân cấp tỉnh quyết định, mỗi tỉnh một mức — phổ biến 100.000đ/lần cấp mới (liên hiệp hợp tác xã 200.000đ/lần), thay đổi thường 20.000–50.000đ/lần, nhiều địa phương miễn khi nộp trực tuyến.<br>Muốn biết lệ phí của một thủ tục cụ thể, cứ gõ tên thủ tục, ví dụ “lệ phí thành lập công ty cổ phần”.');return}
+ if(timeAsk){chatBot('<b>Thời hạn giải quyết:</b> hồ sơ hợp lệ được cấp Giấy chứng nhận trong <b>3 ngày làm việc</b> kể từ ngày tiếp nhận. Một số thủ tục nhanh hơn: cấp lại Giấy chứng nhận 01 ngày làm việc; hiệu đính thông tin, chấm dứt hoạt động đơn vị phụ thuộc, đăng ký tổ hợp tác 02 ngày làm việc.');return}
+ if(indList.length){chatBot('Ngành nghề liên quan:<div class="cbtns">'+indList.slice(0,6).map(function(r){return '<button type="button" class="cbtn" onclick="chatOpenInd(\''+r[0]+'\')"><b>'+r[0]+'</b> — '+chatEsc(r[1])+'</button>'}).join("")+'</div>');return}
+ chatBot('Nội dung này <b>chưa có trong dữ liệu hướng dẫn trên trang</b>, nên tôi chưa trả lời được — tránh đưa thông tin không đúng. Bạn thử hỏi theo tên thủ tục (ví dụ: “thành lập TNHH hai thành viên cần hồ sơ gì”, “đổi địa chỉ trụ sở”), theo mã ngành (ví dụ: “mã ngành 6810”) hoặc về lệ phí, thời hạn, cách nộp qua mạng.<br>Cần hỗ trợ trực tiếp: Zalo <b>0385 384 564</b> hoặc điện thoại <a href="tel:+842553822730">0255 382 2730</a> — Phòng Đăng ký kinh doanh, 238 Phan Bội Châu, phường Cẩm Thành, tỉnh Quảng Ngãi.');
+ chatChips(["Có những loại hình doanh nghiệp nào?","Lệ phí đăng ký doanh nghiệp bao nhiêu?","Mất Giấy chứng nhận thì cấp lại thế nào?","Giải thể doanh nghiệp giai đoạn 1"]);
+}
+function chatGoViewSoon(v){if(v==="loaihinh"){chatBot('Bạn xem các loại hình doanh nghiệp tại mục Thành lập mới — chọn đúng loại hình để xem hồ sơ của loại hình đó.<div class="cbtns"><button type="button" class="cbtn solid" onclick="chatGoView(\'loaihinh\')">Xem các loại hình</button></div>')}else{chatGoView(v)}}
+function chatSend(e){if(e)e.preventDefault();var inp=document.getElementById("chatInput");var raw=(inp.value||"").trim();if(!raw)return false;var u=document.createElement("div");u.className="cmsg me";u.textContent=raw;var b=document.getElementById("chatBody");b.appendChild(u);b.scrollTop=b.scrollHeight;inp.value="";var t=chatBot("Đang tra cứu dữ liệu trên trang…");setTimeout(function(){t.remove();try{chatAnswer(raw)}catch(err){chatBot("Xin lỗi, tôi chưa tra được câu này. Bạn thử diễn đạt ngắn hơn theo tên thủ tục hoặc mã ngành nhé.")}},320);return false}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){var p=document.getElementById("chatPanel");if(p&&p.classList.contains("open"))chatToggle(true)}});
 </script>
 </body>
 </html>
