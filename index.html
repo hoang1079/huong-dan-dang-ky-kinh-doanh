@@ -302,7 +302,6 @@ footer .fver{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,
 .cbtn:hover{background:var(--soft2)}
 .cbtn.solid{background:var(--blue);color:#fff}
 .cbtn.solid:hover{background:var(--blue-d)}
-.chatchips{display:flex;gap:6px;flex-wrap:wrap;padding:9px 12px 2px;background:#fff;border-top:1px solid var(--line)}
 .chatform{display:flex;gap:8px;padding:10px 12px 12px;background:#fff}
 .chatform input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:9px;padding:0 12px;min-height:44px;font-size:15px;color:var(--ink);background:#fff}
 .chatform input:focus{border-color:var(--blue);outline:0}
@@ -697,7 +696,6 @@ footer .fver{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,
 <div class="chatpanel" id="chatPanel" role="dialog" aria-label="Trợ lý hỏi đáp đăng ký kinh doanh">
 <div class="chathead"><div><b>Trợ lý hỏi đáp</b><span>Trả lời tự động theo đúng dữ liệu đã có trên trang này: thủ tục, hồ sơ, lệ phí, thời hạn và ngành nghề.</span></div><button class="chatx" onclick="chatToggle(true)" aria-label="Đóng khung hỏi đáp">✕</button></div>
 <div class="chatbody" id="chatBody" aria-live="polite"></div>
-<div class="chatchips" id="chatChips"></div>
 <form class="chatform" onsubmit="return chatSend(event)"><input id="chatInput" type="text" placeholder="Nhập câu hỏi, ví dụ: thành lập TNHH cần hồ sơ gì?" aria-label="Nhập câu hỏi" autocomplete="off"><button type="submit">Gửi</button></form>
 </div>
 <script>
@@ -1113,7 +1111,7 @@ function chatToggle(forceClose){
 }
 function chatAdd(cls,html){var b=document.getElementById("chatBody");var d=document.createElement("div");d.className="cmsg "+cls;d.innerHTML=html;b.appendChild(d);b.scrollTop=b.scrollHeight;return d}
 function chatBot(html){return chatAdd("bot",html)}
-function chatChips(list){var c=document.getElementById("chatChips");c.innerHTML=list.map(function(t){return '<button type="button" class="cbtn" onclick="chatAsk(this.getAttribute(\'data-q\'))" data-q="'+chatEsc(t)+'">'+chatEsc(t)+'</button>'}).join("")}
+function chatChips(list){chatBot('Bạn có thể bấm vào một câu hỏi mẫu bên dưới, hoặc gõ câu hỏi của mình vào ô nhập:<div class="cbtns">'+list.map(function(t){return '<button type="button" class="cbtn" onclick="chatAsk(this.getAttribute(\'data-q\'))" data-q="'+chatEsc(t)+'">'+chatEsc(t)+'</button>'}).join("")+'</div>')}
 function chatAsk(t){var inp=document.getElementById("chatInput");inp.value=t;chatSend(null)}
 function chatOpenProc(i){chatToggle(true);openProcIdx(i)}
 function chatGoType(id){chatToggle(true);pickType(id)}
